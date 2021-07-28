@@ -1,0 +1,133 @@
+<!DOCTYPE html >
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        <title>KF6013 About</title>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <script src="js/general.js"></script> 
+    </head>
+
+    <body>
+
+    <nav id="navigationbar">
+        <a href="index.html#navigationbar">Main Page</a> 
+        <a href="index.html#directionsOuter">Directions</a> 
+        <a href="index.html#twitterFeedHeading">Twitter Feed</a> 
+        <a href="index.html#twitterPost">Post a Tweet</a>  
+        <a href="about.html">About</a> 
+    </nav>
+    <nav id="mobileNavigationbar">
+        <button id="mobileNavButton"> MENU </button>
+        <a href="index.html#navigationbar">Main Page</a> 
+        <a href="index.html#directionsOuter">Directions</a> 
+        <a href="index.html#twitterFeedHeading">Twitter Feed</a>
+        <a href="index.html#twitterPost">Post a Tweet</a>
+        <a href="about.html">About</a> 
+    </nav>
+
+
+
+    <section class="criticalEvaluation">
+
+        <h2 style="text-align: center; margin-top: 40px;"> Part 3 - Critical Evaulation</h2>
+        <div class="downloadArea">
+            <a href="Part3CriticalReflection.pdf" download> Download as a pdf </a>
+        </div>
+        <h3>1 - Cloud Provider</h3>
+            <p>This system implements Azure, this was chosen over Amazon-Web-Services (AWS), although both provide suitable tools to create this website, AWS has a larger market share and more users, figure 1.1. As such there is a larger online community and existing documentation that supported development.</p>
+            <img class="reportImageCenter" src="images/CloudMarketShare.png" style="max-height: 250px;" alt="Market shares of major clous providers in 2021  ">
+            <p>However, Azure is already used by the client (Northumbria University) on many existing systems, and by combining this system into the client’s Azure subscription, bundling deals would reduce the ongoing cost (Azure, 2020a). Additionally, staff employed to manage Azure systems would not have to re-train for AWS. </p>
+            <p>The client makes use of Azures Active-Directory (Azure, 2019a) to store student and staff data, along with other user-specific data such as timetabling information.  AWS’ “Single Sign-On” service would allow access to the existing Azure Active-Directory from an AWS system (AWS, 2019a), however, native Azure services allow for significantly less complex access, that would be easier to maintain.</p>
+            <p>By implementing Azure, this data could be accessed easily within the client’s subscription, allowing future expansion of the system enabling a user to login with their Northumbria account and access data such as student timetables, class locations and other data specific to the user, providing developers more data to create more useful features. </p>
+        <h3>2 - Services Used</h3>
+            <p>This website uses an Azure B1s virtual-machine (Azure, 2017), this was configured with Apache as a web-server. This B1s is low-cost and powerful enough to run a basic webserver for this system as this website “offloads” computationally expensive tasks such as route-calculating to external APIs (Lin et al, 2019). Furthermore, the B-series virtual-machines can “scale-up” their compute performance to accommodate large, unexpected spikes in users without overwhelming the server. </p>
+            <p>Using a virtual-machine meant that File-Zilla and SSH (Secure Shell) had to be used to manually deploy code. This allows for discrepancies between the Git-repository used during development, and code on the server. Dearle (2007) highlights this inconsistency between environments as difficult to maintain, and a likely cause of “last-minute” deployment bugs.</p>
+            <p>Azure Dev-Ops provides services allowing Git-repository to be directly linked to the deployment server (Azure, 2020b), simplifying management of deployed files, and allowing roll-backs if any issues are found, addressing concerns from Dearle (2007). This can be used in conjunction with Northumbria’s existing Azure Active-Directory, to control who can access source code (Azure, 2021b).</p>
+            <p>Robustness of code can be further ensured by implementing Azure test-plans (Azure, 2019b), a service that can automatically generate and preform tests, while providing detailed analysis on errors, and potential causes.</p>
+            <p>Additionally, as file transfers between the repository and the server are internal, SSH port 22 can be permanently closed on the server, removing a potential access point for attackers.</p>
+            <p>If more funding were available, Dev-Ops services could have been used to create a more fluid development environment where code would be easier to maintain and increase security.</p>
+        <h3>3 - Technichal Architecture</h3>
+            <p>An IaaS (infrastructure as a service) architecture has been used with a B1s virtual-machine configured with a slightly modified “LAMP” stack, shown in table 3.1. As stated in the original specification, SQLite was chosen as the database engine, however as it was not required, it has not been installed. </p>
+            <img class="reportImageCenter" src="images/table32.png" style="max-height: 130px;" alt="Software verison installed on this virtual machine">
+            <p>Manually configuring the virtual-machine has allowed complete control over the server and any software needed. However, this resulted in extra work to configure and manage the server.</p>
+            <p>Chilberto et al (2020, p.157) discuss that websites such has this, that make use of common backend technology stacks, a more automated PaaS (Platform as a service) such as Azure App-Service (Azure, 2021c) or AWS Elastic-Beanstalk (AWS, 2021a) would have been more suitable.</p>
+            <p>The use of App-Service automatically configures systems such as databases and network interfaces, reducing responsibility on the system owner to set-up and maintain these manually.  However, providing less control over the server configuration, meaning it may not be suitable for specialised systems.</p>
+            <p>This abstraction of low-level systems could be taken a step further by implementing a complete BaaS (backend as a service), such as Google Firebase and AWS Amplify. This would have suited this website extremely well, as authentication with third party apps such as Twitter could be achieved automatically (Kumar, 2018, p.77), allowing development to focus only on front-end components. figure 3.2 shows a comparison.</p>
+            <img class="reportImageCenter" src="images/fig32.png" style="max-height: 600px;" alt="Figure 3.1 - Architectural components and their ownership responsibilities compared between Virtual machine server, azure app services and Firebase. ">
+            <p>Manually configuring a virtual-machine has allowed control over the setup of the server but requiring extra time. The use of PaaS would have allowed server configuration to be managed automatically by the cloud-provider for a higher fee. BaaS would simplify development further, completely removing the need for server setups and backend code.</p>
+            <img class="reportImageCenter" src="images/fig33.png" style="max-height: 600px;" alt="Figure 3.1 - Scale comparing cloud services and thier ease of configuration">
+        <h3>4 - Budget Required</h3>
+            <p>As an Azure student subscription was used for this assignment, care has been taken to ensure the cost was low, allowing credits to last throughout the module. This has meant that only the minimum cloud-services required to meet the specification have been used. Table 4.1 shows costs for services being used. </p>
+            <img class="reportImageCenter" src="images/table41.png" style="max-height: 300px;" alt="table 4.1 - Costing summary of services implemented for this assignment.  ">
+            <p>This budget has enabled the system to meet its requirements while staying within the allotted student-credits, however in a commercial context these choices are not ideal. The small b1s virtual machine may struggle to handle heavy traffic, and the deployment of code using SSH has made version-control difficult.</p>
+            <p>Table 4.2 presents a revised costing, making use of recommended services. </p>
+            <img class="reportImageCenter" src="images/table42.png" style="max-height: 520px;" alt="Table 4.2 – Costing summary including services that should be used to deploy this website in a commercial context and support a team of developers. ">
+            <p>Services such as Azure-Defender and a custom domain have been included, to ensure the system is suitable and secured for public use. However, most of the increased cost contributes to simplifying development and deployment of code.</p>
+            <p>As discussed in section 3, App-Service has been chosen to reduce time configuring and maintaining a server, and Dev-Ops suite has been included allowing for simpler management of deployed code. </p>
+            <p>This slightly higher budget may not directly increase the quality of the system from user perspective. However, Thomas and Hunt, (2019) discuss that streamlining workflows with automated testing and deployment strategies will allow more time to be spent on development of extra features. Hence the higher budget is an investment that will benefit developers, and as a result a more feature rich product can be produced, providing a more complete user experience. </p>
+        <h3>5 - Hosting Region</h3>
+            <p>The system is hosted in London, as almost all users are expected to be from the North-East of England. In line with best practice guides provided by Google Cloud (2021), UK-South (London) is the closest location geographically and will reduce latency when using the app as less networking infrastructure is required to get data from London to Newcastle. </p>
+            <p>Additionally, this complies with “data-sovereignty” required from the Data Protection Act (2018) stating that data pertaining to an individual must be stored within the European Union. </p> 
+            <p>The system makes use of PHP sessions to store users’ Twitter authentication data on the server VM. As this twitter data contains a user’s name, the data protection act states it must be kept within the EU, not just the UK. Azure offers multiple locations within the EU that are geographically close to Newcastle with lower costs than UK-South, as shown in table 4.1.</p>
+            <img class="reportImageCenter" src="images/AzureLoactionsTable.png"  style="max-height: 250px;"alt="Azure hosting regions and the average cost per hour across all virtual machines offered">
+            <p>Hosting in Dublin could reduce costs while still being geographically near Newcastle. However, the UK-EU trade operations agreement allows the flow of data between the UK and EU until 31st of December 2021 at least, with no legislation being finalised for after this period (European Commission, 2020). Revised legislation brings the possibility that all data from the UK may have to stay within the UK and not just the EU. </p>
+            <p>The owner of the deployed system must decide if the cost savings from hosting in Dublin are worth the “cumbersome, and sometimes costly” (Google Cloud, 2021) task of migrating datacentre if legislation after December 2021 requires it. </p>
+        <h3>6 - Securtity Provisons </h3>
+            <p>Azure-Firewall has been used to control external access to the virtual-machine (Azure, 2021f). This has allowed SSH access to be protected with key-pairs, instead of passwords, following recommendations from Owens and Matthews (2008). Although access to port-22 (SSH) is protected, it was still open during development, this is a key concern as if an attacker gained access, they would have root control over the virtual-machine.</p>
+            <p>Azure Security-Centre (Azure, 2021e) is included as a free service with an Azure subscription. The free-tier provides automatic security audits for a single virtual-machine, highlighting vulnerabilities providing recommendations for improvement (Figure 6.1). This was ideal for this application, as the whole system could be monitored, there would be little need to upgrade this unless more virtual-machines were added. </p>
+            <img class="reportImageCenter" src="images/fig61.png"  alt="Figure 6.1 - Azure security centre autmated reports dashboard">
+            <p>In addition to firewall and port settings, Apache and PHP have been configured in a secure way, with error messages being disabled and sensitive directories, such as those containing API access tokens have been protected with .htaccess files to forbid access over HTTP. </p>
+            <p>Current security measures are suitable for the system in its current state, as there are no databases, or stores of sensitive ‘special category data’ (Data Protection Act, 2018). However, as much of the current measures have had to be manually configured, the possibility of human-error is introduced, which is presented by Boyce et al (2011) to be a main cause of cyber-security flaws. </p>
+            <p>As discussed throughout this report, a more abstracted PaaS cloud service such as AWS Elastic-Beanstalk or Azure App-Service would automate much of this configuration, reducing the possibility of human-error. </p>
+            <p>Additionally, within the Azure-suite, Azure-defender can integrate tightly with the App-Service backend, allowing security measures to be adjusted in response to detected threats such as anomalous login attempts, ensuring security measures are always up to date and relevant to expected threats (Azure, 2020c). </p>
+            <p>Current measures provide suitable protection within the scope of this project, however if the system were to be deployed alongside multiple other virtual-machines, the automated security provided by PaaS would reduce time to manually set-up security measures and reduce human error. As making use of services such as Azure-Defender would only have a marginal increase in cost (shown in table 4.2) they would be more suitable in commercial context than the manually configured security measures used. </p>
+         <h3>References</h3>
+            <ol>
+                <li>AWS, (2019a)., <i>Manage access to AWS centrally for Azure AD users with AWS Single Sign-on</i>,[Online] retrieved from <a href="https://aws.amazon.com/about-aws/whats-new/2019/11/manage-access-to-aws-centrally-for-azure-ad-users-with-aws-single-sign-on/">https://aws.amazon.com/about-aws/whats-new/2019/11/manage-access-to-aws-centrally-for-azure-ad-users-with-aws-single-sign-on/</a> (accessed 10/05/2021)</li>
+                <li>AWS, (2021a)., <i>AWS Elastic Beanstalk, Easy to Begin, Impossible to Outgrow</i>, [online] available at <a href="https://aws.amazon.com/elasticbeanstalk/">https://aws.amazon.com/elasticbeanstalk/</a> (accessed 12/05/2021)</li>
+                <li>Azure, (2017)., <i>Introducing B-Series, our new burstable VM size</i>, [online] available at <a href="https://azure.microsoft.com/en-gb/blog/introducing-b-series-our-new-burstable-vm-size/">https://azure.microsoft.com/en-gb/blog/introducing-b-series-our-new-burstable-vm-size/</a>  (Accessed 11/05/2021)</li>
+                <li>Azure, (2019a)., <i>Azure Identity Management and access control security best practices</i>, [online] retrieved from <a href="https://docs.microsoft.com/en-us/azure/security/fundamentals/identity-management-best-practices">https://docs.microsoft.com/en-us/azure/security/fundamentals/identity-management-best-practices</a> (accessed 10/05/2021)</li>
+                <li>Azure, (2019b)., <i>Azure test Plans, Create Test Plans and Test Suites </i>, [online] retrieved from <a href="https://docs.microsoft.com/en-us/azure/devops/test/create-a-test-plan?view=azure-devops"> https://docs.microsoft.com/en-us/azure/devops/test/create-a-test-plan?view=azure-devops </a>  (accessed 11/05/2021)</li>
+                <li>Azure, (2020a)., <i>Azure Hybrid Benefit,</i> [online] retrieved from <a href="https://azure.microsoft.com/en-gb/pricing/hybrid-benefit/">https://azure.microsoft.com/en-gb/pricing/hybrid-benefit/</a> (accessed 10/05/2021)</li>
+                <li>Azure, (2020a)., <i>What is Azure Repos?, </i>[online] retrieved from <a href="https://docs.microsoft.com/en-us/azure/devops/repos/get-started/what-is-repos?view=azure-devops">https://docs.microsoft.com/en-us/azure/devops/repos/get-started/what-is-repos?view=azure-devops</a>  (accessed 11/05/2021)</li>
+                <li>Azure, (2020c)., <i>Introduction to Azure Defender,</i> [online] available at <a href="https://docs.microsoft.com/en-us/azure/security-center/azure-defender">https://docs.microsoft.com/en-us/azure/security-center/azure-defender</a> (accessed 14/05/2021)</li>
+                <li>Azure, (2021b)., <i>What is Azure role-based access control (Azure RBAC)?</i> [online] retrieved from <a href="https://docs.microsoft.com/en-us/azure/role-based-access-control/overview">https://docs.microsoft.com/en-us/azure/role-based-access-control/overview</a>  (accessed 11/05/2021)</li>
+                <li>Azure, (2021c)., <i>App Service, A fully managed platform for building, deploying and scaling your web apps,</i> [online] available at <a href="https://azure.microsoft.com/en-gb/services/app-service/">https://azure.microsoft.com/en-gb/services/app-service/</a> (accessed 11/05/2021)</li>
+                <li>Azure, (2021d)., <i>Azure Pricing Calculator</i>, [online] available at <a href="https://azure.microsoft.com/en-gb/pricing/calculator/">https://azure.microsoft.com/en-gb/pricing/calculator/</a> (accessed 12/05/2021) </li>
+                <li>Azure, (2021e)., <i>What is Azure Security Center?</i> [online] available at <a href="https://docs.microsoft.com/en-us/azure/security-center/security-center-introduction">https://docs.microsoft.com/en-us/azure/security-center/security-center-introduction</a> (accessed 14/05/2021) </li>
+                <li>Azure, (2021f)., <i>What is Azure Firewall?,</i> [online] available at <a href="https://docs.microsoft.com/en-us/azure/firewall/overview"> https://docs.microsoft.com/en-us/azure/firewall/overview</a> (accessed 14/05/2021)</li>
+                <li>AzurePrice.net (2021), <i>Average Price Per Azure Region</i>,  [online] retrieved from <a href="https://azureprice.net/Region">https://azureprice.net/Region</a> (accessed 10/05/2021)</li>
+                <li>Boyce, M. W., Duma, K. M., Hettinger, L. J., Malone, T. B., Wilson, D. P., & Lockett-Reynolds, J. (2011, September). <i>Human performance in cybersecurity: A research agenda.</i> In Proceedings of the </li>
+                <li>Chilberto, J., Zaal, S., Aroraa, G., & Price, E. (2020). <i>Azure Web Apps. </i> In Cloud Debugging and Profiling in Microsoft Azure (pp. 147-175). Apress, Berkeley, CA.</li>
+                <li>Data Protection Act (2018)., UK General Public Acts. [online] retrieved from <a href="https://www.legislation.gov.uk/ukpga/2018/12/contents/enacted">https://www.legislation.gov.uk/ukpga/2018/12/contents/enacted </a> (accessed 10/05/2021)</li>
+                <li>Dearle, A. (2007). <i>Software Deployment, Past, Present and Future,</i> In Future of Software Engineering (FOSE'07) (pp. 269-284). IEEE.</li>
+                <li>European Commission., (2020)., <i>The EU-UK Trade and Cooperation Agreement.</i> [online] retrieved from <a href="https://ec.europa.eu/info/relations-united-kingdom/eu-uk-trade-and-cooperation-agreement_en">https://ec.europa.eu/info/relations-united-kingdom/eu-uk-trade-and-cooperation-agreement_en</a> (accessed 10/05/2021)</li>
+                <li>Google Cloud, (2021)., <i>Best Practices for Compute Engine Regions Selection, </i> Google Cloud Solutions, documentation [Online] retrieved from <a href="https://cloud.google.com/solutions/best-practices-compute-engine-region-selection">https://cloud.google.com/solutions/best-practices-compute-engine-region-selection</a> (accessed 10/05/2021)</li>
+                <li>Kumar, A. (2018). <i>Mastering Firebase for Android Development: Build real-time, scalable, and cloud-enabled Android apps with Firebase.</i> Packt Publishing Ltd.</li>
+                <li>Lin, L., Liao, X., Jin, H., & Li, P. (2019). <i>Computation offloading toward edge computing.</i> Proceedings of the IEEE, 107(8), 1584-1607.</li>
+                <li>Owens, J., & Matthews, J. (2008). <i>A study of passwords and methods used in brute-force SSH attacks</i>. In USENIX Workshop on Large-Scale Exploits and Emergent Threats (LEET).</li>
+                <li>Statista, (2021)., <i>Cloud infrastructure services vendor market share worldwide from 4th quarter 2017 to 1st quarter 2021.</i> [Online] retrieved from <a href="https://www.statista.com/statistics/967365/worldwide-cloud-infrastructure-services-market-share-vendor/">https://www.statista.com/statistics/967365/worldwide-cloud-infrastructure-services-market-share-vendor/ </a> (accessed 10/05/2021)</li>
+                <li>Thomas, D., & Hunt, A. (2019). <i>The Pragmatic Programmer: your journey to mastery.</i> Addison-Wesley Professional.</li>
+            </ol>
+
+
+
+
+    </section>
+
+
+    <footer>
+        <p>Tom Hegarty</p>
+        <p>16017590</p>
+        <p>KF6013</p>
+        <p>Northumbria University Newcastle</p>
+    </footer>
+
+
+</body>
+</html>
+

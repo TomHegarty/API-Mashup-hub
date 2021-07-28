@@ -1,0 +1,39 @@
+
+<!DOCTYPE html >
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9bMAItwlhAKxhKNuyXQf1QPrU41YMK-Y&map_ids=1ecaef5fde9e1cbd&libraries=localContext&v=beta&callback=initMap"></script>
+        <title>KF6013</title>
+        <script src="js/weather.js"> </script>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <script src="js/general.js"></script> 
+    </head>
+
+
+
+    <p>check console</p>
+  
+
+
+<script>
+    
+        $.ajax({
+            url: "php/test.php",
+            type: 'GET',
+            success: function(response){
+                //tweets = JSON.parse(response);
+                console.log(response);
+            }
+        });
+
+</script>
+
+
+</style>
+
+</html>

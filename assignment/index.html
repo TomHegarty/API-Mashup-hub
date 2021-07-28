@@ -1,0 +1,224 @@
+<!DOCTYPE html >
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+   
+        <script src="https://maps.googleapis.com/maps/api/js?key=REMOVED FOR GITHUB&map_ids=1ecaef5fde9e1cbd&libraries=localContext&v=beta&callback=initMap"></script>
+
+
+        <title>KF6013</title>
+        <script src="js/weather.js"> </script>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <script src="js/general.js"></script> 
+        
+    </head>
+
+    <body>
+        
+    <script src="js/markerTweets.js"></script>
+
+        <nav id="navigationbar">
+            <a href="index.html#navigationbar">Main Page</a> 
+            <a href="index.html#directionsOuter">Directions</a> 
+            <a href="index.html#twitterFeedHeading">Twitter Feed</a> 
+            <a href="index.html#twitterPost">Post a Tweet</a>  
+            <a href="about.html">About</a> 
+        </nav>
+        <nav id="mobileNavigationbar">
+            <button id="mobileNavButton"> MENU </button>
+            <a href="index.html#navigationbar">Main Page</a> 
+            <a href="index.html#directionsOuter">Directions</a> 
+            <a href="index.html#twitterFeedHeading">Twitter Feed</a>
+            <a href="index.html#twitterPost">Post a Tweet</a>
+            <a href="about.html">About</a> 
+        </nav>
+
+        <div class="weatherOuter">
+            <div class="weatherSection1">
+                <div class="weatherMain">
+                    <div class="mainIconCont">
+                        <img id="mainIcon" src="#" alt="Loading Weather Icon">
+                    </div>
+                    <div class="mainWeatherOutput">
+                        <div>
+                            <p>Loaction:<b> <span id="loac"></span></b></p>
+                            <p>Description:<b> <span id="desc"></span></b></p>
+                            <p>Temperature:<b> <span id="temp"></span></b></p>
+                            <p>Feels Like:<b> <span id="feelsLike"></span></b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="weatherMain">
+                    <div class="windArrowCont">
+                        <img id="windArrow" src="icons/windArrow.jpg" alt="wind Direction arrow">
+                    </div>
+                    <div class="mainWeatherOutput">
+                        <p>Wind Speed: <b><span id="windspeed"></span></b></p>
+                        <p>Wind Direction: <b><span id="winddirec"></span></b></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="weatherSection2"></div>   
+        </div>
+
+        <script src="js/map.js"></script>
+        <div id="map" style="width:90%;height:800px;" onload="localContext()"></div>
+
+        <div class="TweetMarkersPanel">
+            <div class="directionInfo">
+                <h2>Map Tweet Markers</h2>
+                <p>Click the button below to pin tweets containing @NU_CISdept, @NorthumbriaSU, @NUlibray, or @NorthumbriaUni to the map!</p>
+                <p>The markers are generated using the location of the twitter users’ profile and uses Googles Geocode API to get the coordinates of that location. </p>
+                <p>Google has tight restrictions on how many geocodes they provide within a time, so this button will timeout for a short while after clicking. </p>
+            </div>
+            <div class="showTweetsControls">
+                <input id="submit" type="button" value="Show Tweets"/>
+                <div id="timeoutBarOuter">
+                    <div id="timeoutBar"></div>
+                </div>
+                
+            </div>
+        </div>
+
+        <section>
+        <script src="js/directions.js"></script>
+        <div class="directionsOuter" id="directionsOuter">
+
+            <div class="directionInfo">
+                <h2>Directions and Local Places</h2>
+                <p>Here you can get direction to the locations on campus and find places of interest nearby.</p>
+                <p>Click on the map to add a location or type your current address and click “get directions” for a list of directions and a route shown on the map.</p>
+                <p>Find areas of interest by selecting the types of places you want and clicking “Find places”.</p>
+            </div>
+
+            <div class="matrixOuter">
+                <div class="addressInput">
+                    <label for="origin"><b>Enter your Address:</b></label>
+                    <input type="text" id="origin" name="origin" value="Newcastle" required><br>
+                </div>
+                <div>
+                    <input type="checkbox" id="markerDirections" name="markerDirections">
+                    <label for="markerDirections">or show directions from dropped marker</label><br>
+                </div>
+
+                <label for="destination"><b>Destination:</b></label>
+                <select id="destination" name="destination">
+                    <option value="campus">City Campus</option>
+                    <option value="cis">CIS</option>
+                    <option value="studentsUnion">Students Union</option>
+                    <option value="library">Library</option>
+                </select><br>
+                <label for="mode"><b>Mode of travel:</b></label>
+                <select id="mode" name="mode">
+                    <option value="WALKING">Walking</option>
+                    <option value="BICYCLING">Cycling</option>
+                    <option value="DRIVING">Driving</option>
+                    <option value="TRANSIT">Public Transport</option>
+                </select>
+
+                
+                <div class="directionsButtons">
+                    <button id="directionsButton"> Get Directions </button>
+                    <button onclick="window.location.href='#map'"> Show Route </button>
+                </div>
+
+                <div class="distanceOutput">
+                    <p><b>From: </b><span id="from">...</span></p>
+                    <p><b>To: </b><span id="to">...</span></p>
+                    <p><b>Distance: </b><span id="distance">...</span></p>
+                    <p><b>Duration: </b><span id="duration">...</span></p>
+                    <p>Status:<span id="status"></span></p>
+                </div>
+            </div>
+            
+            <div id="panel"></div>
+
+            <div id="placesOuter">
+                <h2>Find Places of Interest</h2>
+                <p>Select places you want to see:</p>
+                <input type="checkbox" id="restaurant"  value="restaurant" checked="checked">
+                <label for="restaurant">Restaurants</label><br>
+                <input type="checkbox" id="cafe" value="cafe" checked="checked">
+                <label for="cafe">Cafes</label><br>
+                <input type="checkbox" id="tourist_attraction"  value="tourist_attraction" checked="checked">
+                <label for="tourist_attraction">Tourist Attractions</label><br>
+                <input type="checkbox" id="bar" value="bar" checked="checked">
+                <label for="bar">Bars</label><br>
+                <input type="checkbox" id="clothing_store" value="clothing_store" checked="checked">
+                <label for="clothing_store">Clothing Stores</label><br>
+                <input type="checkbox" id="shopping_mall" value="shopping_mall" checked="checked">
+                <label for="shopping_mall">Shopping Centres</label><br>
+                <input type="checkbox" id="movie_theater" value="movie_theater" checked="checked">
+                <label for="movie_theater">Movie Theaters</label><br>
+                <button id="NewPlacesButton"> Find Places</button>
+                <button id="localPlacesButton"> Show on Map </button>
+            </div>
+        </div>
+        </section>
+
+        <section>
+            <div class="twitterFeedHeading" id="twitterFeedHeading">
+                <h2> Twitter Feed </h2>
+                <p> A Twitter feed showing the latest tweets posted by or containing the handles @NU_CISdept, @NorthumbriaSU, @NULIbrary and @NorthumbriaUni. Tweets can be filtered by handle. </p>
+                <div class="tweetSelectionOuter">
+                    <div class="tweetSelectionForm">
+                        <button id="tweetFilterButton"> Show Filters &#9660;</button> 
+                        <span id="filterArea">
+                            Filter tweets Containing: <br>
+                            <input type="checkbox" id="@NU_CISdept"  value="NU_CISdept" checked="checked">
+                            <label for="@NU_CISdept">@NU_CISdept</label><br>
+                            <input type="checkbox" id="@NorthumbriaSU" value="NorthumbriaSU" checked="checked">
+                            <label for="@NorthumbriaSU">@NorthumbriaSU</label><br>
+                            <input type="checkbox" id="@NULibrary"  value="NULibrary" checked="checked">
+                            <label for="@NULibrary">@NULibrary</label><br>
+                            <input type="checkbox" id="@NorthumbriaUni" value="NorthumbriaUni" checked="checked">
+                            <label for="@NorthumbriaUni">@NorthumbriaUni</label><br>
+                            <button id="tweetSelectionButton"> Update Fitlers </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div id="tweetsarea">
+            </div>
+            <script src="js/twitterFeed.js"> </script>
+        </section>
+
+        <!-- area for user to post a tweet -->
+        <section>
+            <div class="postweetOuter" id="twitterPost">
+                <div class="PostTweetHeading">
+                    <h2>Post a Tweet</h2>
+                    <p>Here you can authorise this website, authenticate with twitter and post a tweet. <br>text enterered will be appened with "#KF6013_Assignment_Task"</p>
+                </div>
+                <div class="TweetInputContainer">
+                    <form id="tweetMessage">					
+                        <label for="tweetInput" >Enter a Tweet</label>
+                        <input type="text" name="tweetInput" id="tweetInput" required/>
+                        <input type="submit" value="Post Tweet"/>
+                    </form>
+                </div>
+                <p class="tweetOutputheading"> Tweets you have sent from this page. </p>
+                <div id="tweetOutput">
+                    
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Tom Hegarty</p>
+            <p>16017590</p>
+            <p>KF6013</p>
+            <p>Northumbria University Newcastle</p>
+        </footer>
+
+    </body>
+</html>
+
+<script src="js/tweetsLoactions.js"> </script>
+<script src="js/postTweets.js"></script>
+
